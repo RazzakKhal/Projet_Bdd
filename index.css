@@ -1,0 +1,19 @@
+body{
+    height:550px;
+    width:95%;
+    font-size:30px;
+    
+    
+}
+
+
+#formulaire{
+    height:550px;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border:2px solid black;
+    
+
+}
