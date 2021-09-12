@@ -35,6 +35,7 @@ if($nbpseudo[0] == false && $nbmail[0] == false){
     $requête3->execute();
 // on a entré dans la bdd les valeurs fournies par l'utilisateur
     echo ' enregistrement réussi';
+    header('Location:https://localhost/Projet_bdd/connexion.php');
 }
 else{
     echo 'le mail ou le pseudo sont déjà existants dans notre base de donnée';
