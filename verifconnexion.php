@@ -2,8 +2,8 @@
 
 // on recupere mail et mot de passe
 
-$mail = $_POST['mail'];
-$pass = $_POST['pass'];   
+$mail = htmlspecialchars($_POST['mail']); // ajout evitement faille XSS avec htmlspecialchars
+$pass = htmlspecialchars($_POST['pass']);   
 
 // on les compare aux mail et pass de la bdd
 
@@ -16,7 +16,7 @@ $res = $requete->fetch(PDO::FETCH_NUM);
 
 if($res){ // si la requête s'est bien passé
  // je compare le pass de la bdd hashé au pass fourni par l'utilisateur grace à password_verify
-if(!password_verify($pass, $res[0])){    // si ca ne renvoi pas true
+if(!password_verify($pass, $res[0])){    // si les mots de passes sont différents
     echo 'erreur dans le remplissage du mail ou du mot de passe';
 }
 else{
@@ -32,9 +32,6 @@ else{
 else{ // si la requête s'est mal passé
     echo 'compte inexistant';
 }
-
-
-// si c'est bon on crée les variables sessions de l'utilisateur
 
 // on ajoute une option de connexion automatique gràce aux cookies
 

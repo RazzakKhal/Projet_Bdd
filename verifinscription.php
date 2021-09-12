@@ -1,9 +1,10 @@
 <?php
 
 $pattern = '/@+/';
-$verifmail = $_POST['mail'];
-$verifpseudo = $_POST['pseudo'];
-$verifpass=password_hash($_POST['pass'],PASSWORD_BCRYPT);
+$verifmail = htmlspecialchars($_POST['mail']); //htmlspecialchars pour eviter failles XSS
+$verifpseudo = htmlspecialchars($_POST['pseudo']);
+$vfpass = htmlspecialchars($_POST['pass']);
+$verifpass=password_hash($vfpass,PASSWORD_BCRYPT);
 
 // On vérifie si les mots de passe entrées sont identiques et si le mail contient un @
 
@@ -21,7 +22,7 @@ $requête2=$pdo->prepare('SELECT COUNT(*) FROM utilisateur WHERE mail=:mail');  
 $requête2->bindValue(':mail',$verifmail);
 $requête2->execute();
 
-
+// on prépare chaque requête car cela empeche les injections SQL
 $nbpseudo= $requête->fetch(PDO::FETCH_NUM);
 $nbmail= $requête2->fetch(PDO::FETCH_NUM);
 // si on trouve 0 ou false en première valeur alors on peut inscrire les informations dans la bdd car aucune info sera remontée
