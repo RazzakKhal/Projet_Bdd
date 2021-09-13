@@ -4,30 +4,35 @@ $pattern = '/@+/';
 $verifmail = htmlspecialchars($_POST['mail']); //htmlspecialchars pour eviter failles XSS
 $verifpseudo = htmlspecialchars($_POST['pseudo']);
 $vfpass = htmlspecialchars($_POST['pass']);
+$vfpass2 = htmlspecialchars($_POST['pass2']);
 $verifpass=password_hash($vfpass,PASSWORD_BCRYPT);
 
 // On vérifie si les mots de passe entrées sont identiques et si le mail contient un @
 
-if($_POST['pass'] === $_POST['pass2']){
+if($vfpass === $vfpass2){
     if(preg_match($pattern, $verifmail)){
         //si c'est bon On vérifie que le login ou le mail n'existe pas deja dans la bdd
 
 $pdo= New PDO('mysql:dbname=Projet_bdd;host=localhost', 'root', '');
 
-$requête=$pdo->prepare('SELECT COUNT(*) FROM utilisateur WHERE pseudo=:pseudo'); // nombre de ligne qui existe avec comme pseudo celui de l'utilisateur
+$requête=$pdo->prepare('SELECT * FROM utilisateur WHERE pseudo=:pseudo'); // tentative de recup des infos via le pseudo
 $requête->bindValue(':pseudo',$verifpseudo);
 $requête->execute();
+$res = $requête->fetch();
 
-$requête2=$pdo->prepare('SELECT COUNT(*) FROM utilisateur WHERE mail=:mail');  // nombre de ligne qui existe avec comme mail celui de l'utilisateur
+
+$requête2=$pdo->prepare('SELECT * FROM utilisateur WHERE mail=:mail');  // tentative de recup via le mail
 $requête2->bindValue(':mail',$verifmail);
 $requête2->execute();
+$res2 = $requête2->fetch();
+
 
 // on prépare chaque requête car cela empeche les injections SQL
-$nbpseudo= $requête->fetch(PDO::FETCH_NUM);
-$nbmail= $requête2->fetch(PDO::FETCH_NUM);
-// si on trouve 0 ou false en première valeur alors on peut inscrire les informations dans la bdd car aucune info sera remontée
 
-if($nbpseudo[0] == false && $nbmail[0] == false){
+// si les 2 requêtes renvoient false c'est que ni le pseudo ni le mail ne sont pris
+
+if(!$res){
+    if(!$res2){
     $requête3=$pdo->prepare('INSERT INTO utilisateur(pseudo, mail, pass, date_inscription) VALUES (:pseudo,:mail,:pass,:datee)');
     $requête3->bindValue(':pseudo', $verifpseudo);
     $requête3->bindValue(':mail', $verifmail);
@@ -39,7 +44,12 @@ if($nbpseudo[0] == false && $nbmail[0] == false){
     header('Location:https://localhost/Projet_bdd/connexion.php');
 }
 else{
-    echo 'le mail ou le pseudo sont déjà existants dans notre base de donnée';
+    echo 'mail déja existant dans notre base de données';
+}
+}
+else{
+    echo 'pseudo déjà existant dans notre base de donnée';
+    var_dump($res2);
 }
 
 

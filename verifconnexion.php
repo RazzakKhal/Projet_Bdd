@@ -31,6 +31,7 @@ else{
 }
 else{ // si la requête s'est mal passé
     echo 'compte inexistant';
+    
 }
 
 // on ajoute une option de connexion automatique gràce aux cookies
