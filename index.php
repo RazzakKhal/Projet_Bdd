@@ -9,13 +9,24 @@
     </head>
     <body>
       <?php 
+      
       session_start();
-      require_once('log.php');
-      $pseudo = $_SESSION['pseudo'];
-      echo "Bienvenue à toi $pseudo";
+      if(isset($_SESSION['id'])){
+        $pseudo = $_SESSION['pseudo'];
+        echo 'Bienvenue ' . $pseudo;
       ?> 
       <a id="deco" href="deconnexion.php"> Deconnexion </a> 
-
+      <?php    // le boutton deconnexion n'apparait que si j'ai pu me connecter
+      }
+      else{
+        echo 'vous devez vous connecter ou vous inscrire';
+      ?>
+      <a id="co" href="connexion.php"> Connexion </a>
+      <a id="inscri" href="inscription.php"> Inscription </a>
+      <?php // le boutton connexion apparait uniquement si je suis déconnecté
+      }
+    
+      ?>
       
       <script src="index.js"></script>
     </body>

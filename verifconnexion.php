@@ -5,12 +5,7 @@
 $mail = htmlspecialchars($_POST['mail']); // ajout evitement faille XSS avec htmlspecialchars
 $pass = htmlspecialchars($_POST['pass']);   
 
-// Si se souvenir de moi est coché on initialise les cookies mail et pass qui serviront plus tard à l'authentification
 
-if(isset($_POST['souvenir'])){
-    setcookie('mail', $mail, time() + 86400);
-    setcookie('password', password_hash($pass, PASSWORD_BCRYPT), time() + 86400);
-}
 
 // on les compare aux mail et pass de la bdd
 
@@ -20,6 +15,7 @@ $requete= $pdo->prepare('SELECT pass, id, pseudo FROM utilisateur WHERE mail=:ma
 $requete->bindValue(':mail', $mail);
 $requete->execute();
 $res = $requete->fetch(PDO::FETCH_NUM);
+
 
 if($res){ // si la requête s'est bien passé
  // je compare le pass de la bdd hashé au pass fourni par l'utilisateur grace à password_verify
@@ -32,7 +28,7 @@ else{
     session_start();  // si ok je demarre une session et intitialise les variables session de l'utilisateur
     $_SESSION['id'] = $res[1];
     $_SESSION['pseudo'] = $res[2];
-    header('Location:http://localhost/Projet_bdd/index.php');
+    header('Location: https://localhost/Projet_bdd/index.php');
 
 }
 }
