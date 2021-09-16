@@ -5,6 +5,13 @@
 $mail = htmlspecialchars($_POST['mail']); // ajout evitement faille XSS avec htmlspecialchars
 $pass = htmlspecialchars($_POST['pass']);   
 
+// Si se souvenir de moi est coché on initialise les cookies mail et pass qui serviront plus tard à l'authentification
+
+if(isset($_POST['souvenir'])){
+    setcookie('mail', $mail, time() + 86400);
+    setcookie('password', password_hash($pass, PASSWORD_BCRYPT), time() + 86400);
+}
+
 // on les compare aux mail et pass de la bdd
 
 $pdo = New PDO('mysql:dbname=Projet_Bdd;host=localhost', 'root', '');

@@ -16,9 +16,12 @@
               <input type="mail" name="mail" id="mail" required><br><br>
               <label for="pass"> Entre ton mot de passe </label>
               <input type="password" name="pass" id="pass" required><br><br>
+              <label for="souvenir"> Se Souvenir de moi </label>
+              <input type="checkbox" name="souvenir" id="souvenir">
               <input type="submit" value="Envoyer">
             </fieldset>
           </form>
+          <a href='inscription.php'>S'inscrire</a>
 
       </div>
       <script src="index.js"></script>
