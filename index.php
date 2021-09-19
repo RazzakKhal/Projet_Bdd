@@ -11,7 +11,10 @@
       <?php 
       session_start();
       require_once('log.php');
-      echo ' Bienvenue ' .  $_SESSION['pseudo'];
+      require_once('utilisateur.php');
+      $utilisateur = New utilisateur();
+      $utilisateur->pseudo = $_SESSION['pseudo'];
+      $utilisateur->callpseudo();
       
       ?>
       <a id="deco" href="deconnexion.php"> Deconnexion </a> 

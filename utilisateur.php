@@ -10,4 +10,9 @@ Class Utilisateur{
     public string $adresse_ip;
     public string $cookie;
 
+    public function callpseudo(){
+         echo 'Bienvenue ' . $this->pseudo;
+    }
+    
+
 }
