@@ -1,11 +1,12 @@
 <?php
-
+require_once('utilisateur.php');
+$utilisateur = New Utilisateur();
 $pattern = "/@+/";
-$verifmail = htmlspecialchars($_POST['mail']); //htmlspecialchars pour eviter failles XSS
-$verifpseudo = htmlspecialchars($_POST['pseudo']);
+$utilisateur->mail = htmlspecialchars($_POST['mail']); //htmlspecialchars pour eviter failles XSS
+$utilisateur->pseudo = htmlspecialchars($_POST['pseudo']);
 $vfpass = htmlspecialchars($_POST['pass']);
 $vfpass2 = htmlspecialchars($_POST['pass2']);
-$verifpass=password_hash($vfpass,PASSWORD_BCRYPT);
+$utilisateur->pass=password_hash($vfpass,PASSWORD_BCRYPT);
 
 // Je veux que mes mot de passe contiennent au moins 8 caractères dont 1 caractère special, 1 majuscule, 1 chiffre
 
@@ -26,19 +27,19 @@ $patt = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/";
 if(preg_match($patt, $_POST['pass'])){
 
 if($vfpass === $vfpass2){ // On vérifie si les mots de passe entrées sont identiques et si le mail contient un @
-    if(preg_match($pattern, $verifmail)){
+    if(preg_match($pattern, $utilisateur->mail)){
         //si c'est bon On vérifie que le login ou le mail n'existe pas deja dans la bdd
 
 $pdo= New PDO('mysql:dbname=Projet_bdd;host=localhost', 'root', '');
 
 $requête=$pdo->prepare('SELECT * FROM utilisateur WHERE pseudo=:pseudo'); // tentative de recup des infos via le pseudo
-$requête->bindValue(':pseudo',$verifpseudo);
+$requête->bindValue(':pseudo',$utilisateur->pseudo);
 $requête->execute();
 $res = $requête->fetch();
 
 
 $requête2=$pdo->prepare('SELECT * FROM utilisateur WHERE mail=:mail');  // tentative de recup via le mail
-$requête2->bindValue(':mail',$verifmail);
+$requête2->bindValue(':mail',$utilisateur->mail);
 $requête2->execute();
 $res2 = $requête2->fetch();
 
@@ -50,9 +51,9 @@ $res2 = $requête2->fetch();
 if(!$res){
     if(!$res2){
     $requête3=$pdo->prepare('INSERT INTO utilisateur(pseudo, mail, pass, date_inscription) VALUES (:pseudo,:mail,:pass,:datee)');
-    $requête3->bindValue(':pseudo', $verifpseudo);
-    $requête3->bindValue(':mail', $verifmail);
-    $requête3->bindValue(':pass', $verifpass);
+    $requête3->bindValue(':pseudo', $utilisateur->pseudo);
+    $requête3->bindValue(':mail', $utilisateur->mail);
+    $requête3->bindValue(':pass', $utilisateur->pass);
     $requête3->bindValue(':datee', time());
     $requête3->execute();
 // on a entré dans la bdd les valeurs fournies par l'utilisateur
