@@ -16,7 +16,7 @@ else if(isset($_COOKIE['souvenir'])){
 
     $pdo = New PDO('mysql:dbname=Projet_Bdd;host=localhost', 'root', '');
     // je récupère l'uniqid dans ma bdd qui correspond à l'id que le client me présente
-    $requete= $pdo->prepare('SELECT uniqid, pseudo, id FROM utilisateur WHERE id=:id');
+    $requete= $pdo->prepare('SELECT uniqid, pseudo, id, adresse_ip FROM utilisateur WHERE id=:id');
     $requete->bindValue(':id', $idcompar, PDO::PARAM_INT);
     $requete->execute();
     $res = $requete->fetch(PDO::FETCH_NUM);
@@ -31,8 +31,9 @@ else if(isset($_COOKIE['souvenir'])){
         $protection2 = 'tp43c'; // ce que j'ai ajouté derrière l'uniqid envoyé dans le cookie souvenir
         $uniqid2 = explode($protection1, $souvenircompar); 
         $uniqid3 = explode($protection2, $uniqid2[1]);
+        $ip = $_SERVER['REMOTE_ADDR']; // récup l'ip du visiteur
         
-        if($uniqid3[0] === $res[0]){ // si l'uniqid récup correspond à celui de la bdd
+        if($uniqid3[0] === $res[0] && $ip === $res[3]){ // si l'uniqid et l'ip récupérés correspondent à ceux de la bdd
         
             $_SESSION['pseudo'] = $res[1];
             $_SESSION['id'] = $res[2];

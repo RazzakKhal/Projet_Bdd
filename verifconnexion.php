@@ -37,12 +37,15 @@ if(isset($_POST['souvenir'])){
     $uniqid = uniqid();
     $uniqid2 = sha1($uniqid);
     $id = $res[1];
+    $ip = $_SERVER['REMOTE_ADDR'];
  
-   // en parallèle j'ajoute l'uniqid crée dans ma base de donnée
-    $requete2= $pdo->prepare('UPDATE utilisateur SET uniqid=:uniqid2 WHERE mail=:mail2');
+   // en parallèle j'ajoute l'uniqid crée dans ma base de donnée et l'adresse ip de l'utilisateur
+    $requete2= $pdo->prepare('UPDATE utilisateur SET uniqid=:uniqid2, adresse_ip=:ip WHERE mail=:mail2');
     $requete2->bindValue(':uniqid2', $uniqid2);
     $requete2->bindValue(':mail2', $mail);
+    $requete2->bindValue(':ip', $ip);
     $requete2->execute();
+
 
      // on creer les cookies souvenir et pseudo
      setcookie('souvenir', 'b6tg3frt54bbd' . $uniqid2 . 'tp43c', time() + 86400, '/', 'localhost', false, true);
