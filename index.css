@@ -1,19 +1,114 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+/* page de connexion */
 body{
-    height:550px;
-    width:95%;
-    font-size:30px;
+background: linear-gradient(45deg, #FC466B, #3F5EFB);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:arial,sans-serif;
+}
+
+#container{
+    position:relative;
+}
+
+form{
+    background-color: rgba(255,255,255, 0.3);
+    padding:30px;
+    height:75vh;
+    width:75vh;
+    border-radius:20px;
+    border-top: 1.5px solid rgba(255,255,255, 0.3);
+    border-left: 1.5px solid rgba(255,255,255, 0.3);
+    /* effet sympa à ajouter */
+    box-shadow:20px 20px 34px rgba(0,0,0, 0.2);
+    text-align:center;
     
     
 }
 
+#titre{
+    padding:5px;
+    color:rgba(255,255,255, 0.7);
+    font-size: 1.8rem;
+    margin-bottom:50px;
+    text-shadow:rgba(255,255,255, 0.3);
+    border:none;
+    border-left:2px solid rgba(255,255,255, 0.3);
+    border-bottom:2px solid rgba(255,255,255, 0.3);
+}
+label{
+    color: rgba(255,255,255, 0.7);
+    font-size: 1.4rem;
+}
 
-#formulaire{
-    height:550px;
-    width:100%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    border:2px solid black;
+#souvenir{
+    font-size: 1rem;
+}
+
+#inscri{
+    color: rgba(255,255,255, 0.7);
+    font-size: 1.8rem;
+    text-decoration:none;
+}
+
+input{
+    background:transparent;
+    padding:20px;
+    margin:20px;
+    border:none;
+    border-right:2px solid rgba(255,255,255, 0.3);
+    border-bottom:2px solid rgba(255,255,255, 0.3);
+ 
+}
+
+.drop{
     
+    background-color: rgba(255,255,255, 0.3);
+    border-radius:10px;
+    border-top: 1.5px solid rgba(255,255,255, 0.3);
+    border-left: 1.5px solid rgba(255,255,255, 0.3);
+    box-shadow:20px 20px 34px rgba(0,0,0, 0.2);
+    filter:blur(2px);
+    box-shadow: 1px 1px 1px rgba(255,255,255, 0.4);
 
+}
+
+.drop1{
+    position:absolute;
+    top:-20px;
+    left:-30px;
+    height:80px;
+    width:80px;
+    z-index:3;
+}
+
+.drop2{
+    position:absolute;
+    top:125px;
+    right:-60px;
+    height:120px;
+    width:120px;
+}
+
+.drop3{
+    position:absolute;
+    bottom:125px;
+    left:-80px;
+    height:120px;
+    width:120px;
+    
+    
+}
+.drop4{
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    height:0.2%;
+    width:100%;
 }

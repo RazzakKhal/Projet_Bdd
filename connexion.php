@@ -13,22 +13,29 @@
         header('Location:https://localhost/Projet_bdd/index.php');
        }
       ?>
-      <div>
+      <div id="container">
           <form id="formulaire" method="post" action="verifconnexion.php">
-              <fieldset>
-                  <legend>Information personnelles</legend><br><br>
-              <label for="mail"> Entre ton mail (identifiant) </label>
-              <input type="mail" name="mail" id="mail" required><br><br>
-              <label for="pass"> Entre ton mot de passe </label>
-              <input type="password" name="pass" id="pass" required><br><br>
-              <label for="souvenir">Se souvenir de moi</label>
+              <legend id="titre">Informations personnelles</legend><br>
+
+              <label for="mail"> Identifiant </label>
+              <input type="mail" name="mail" id="mail" placeholder="Entre ton mail" required><br><br>
+              <label for="pass"> Mot de passe </label>
+              <input type="password" name="pass" id="pass" placeholder="Entre ton mot de passe" required><br><br>
+              <label id="souvenir" for="souvenir">Se souvenir de moi</label>
               <input type="checkbox" name="souvenir" id="souvenir">
               <input type="submit" value="Envoyer">
-            </fieldset>
+         
           </form>
-          <a href='inscription.php'>S'inscrire</a>
+          <a id="inscri" href="inscription.php">S'inscrire</a>
+          <div class="drop drop1"></div>
+          <div class="drop drop2"></div>
+          <div class="drop drop3"></div>
+          <div class="drop drop4"></div>
+        
 
       </div>
+      
+      
       <script src="index.js"></script>
     </body>
 </html>

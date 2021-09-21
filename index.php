@@ -12,7 +12,7 @@
       session_start();
       require_once('log.php');
       require_once('utilisateur.php');
-      $utilisateur = New utilisateur();
+      $utilisateur = New Utilisateur();
       $utilisateur->pseudo = $_SESSION['pseudo'];
       $utilisateur->callpseudo();
       
