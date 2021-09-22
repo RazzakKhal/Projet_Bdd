@@ -5,13 +5,30 @@ $utilisateur= New utilisateur();
 
 $utilisateur->mail = htmlspecialchars($_POST['mail']); // ajout evitement faille XSS avec htmlspecialchars
 $utilisateur->pass = htmlspecialchars($_POST['pass']);   
+// code pour futur application sur heroku et connexion bdd
 
+if (getenv('JAWSDB_URL') !== false){
+    $dbparts = parse_url(getenv('JAWSDB_URL'));
+    
+    $hostname = $dbparts['host'];
+    $username = $dbparts['user'];
+    $password = $dbparts['pass'];
+    $database = ltrim($dbparts['path'],'/');
+    
+    }
+else{
+    $username = 'root';
+    $password = '';
+    $database = 'Projet_Bdd';
+    $hostname = 'localhost';
+    }
+    
 
 
 
 // on les compare aux mail et pass de la bdd
 
-$pdo = New PDO('mysql:dbname=Projet_Bdd;host=localhost', 'root', '');
+$pdo = New PDO("mysql:dbname=$database;host=$hostname", $username, $password);
 
 $requete= $pdo->prepare('SELECT pass, id, pseudo FROM utilisateur WHERE mail=:mail');
 $requete->bindValue(':mail', $utilisateur->mail);
@@ -52,7 +69,10 @@ if(isset($_POST['souvenir'])){
      setcookie('id', $utilisateur->id, time() + 86400, '/', 'localhost', false, true);
     
 }
-    header('Location: https://localhost/Projet_bdd/index.php');
+     $host  = $_SERVER['HTTP_HOST'];
+     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+     $extra = 'index.php';
+     header("Location: http://$host$uri/$extra");
 
 }
 }

@@ -10,7 +10,10 @@
     <body>
       <?php
        if(isset($_SESSION['pseudo']) || isset($_COOKIE['souvenir'])){   // si j'ai une session ou un cookie je vais direct sur index
-        header('Location:https://localhost/Projet_bdd/index.php');
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = 'index.php';
+        header("Location: http://$host$uri/$extra");
        }
       ?>
       <div id="container">

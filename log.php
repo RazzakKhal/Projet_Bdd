@@ -1,12 +1,26 @@
 <?php
 require_once('utilisateur.php');
 $utilisateur= New Utilisateur();
-// le but est que si l'uniqid est récup en base de données, si on le copie colle on ne puisse pas acceder à la session
-//si l'uniqid hashé est copié dans le navigateur, l'utilisateur meme malveillant pourra accéder à la session de l'utilisateur,
-// pour restreindre cela on utilisera une vérification de l'adresse utilisateur->ip
 
-// si une session existe alors rien ne se passe, si aucune session existe mais le cookie souvenir existe alors on compare
+// code pour futur application sur heroku et connexion bdd
 
+if (getenv('JAWSDB_URL') !== false){
+    $dbparts = parse_url(getenv('JAWSDB_URL'));
+    
+    $hostname = $dbparts['host'];
+    $username = $dbparts['user'];
+    $password = $dbparts['pass'];
+    $database = ltrim($dbparts['path'],'/');
+    
+    }
+else{
+    $username = 'root';
+    $password = '';
+    $database = 'Projet_Bdd';
+    $hostname = 'localhost';
+    }
+  //
+    
 if(isset($_SESSION['pseudo'])){
 
 }
@@ -15,7 +29,7 @@ else if(isset($_COOKIE['souvenir'])){
     $utilisateur->id = $_COOKIE['id'];
     $utilisateur->cookie = $_COOKIE['souvenir'];
 
-    $pdo = New PDO('mysql:dbname=Projet_Bdd;host=localhost', 'root', '');
+    $pdo = New PDO("mysql:dbname=$database;host=$hostname", $username, $password);
     // je récupère l'uniqid dans ma bdd qui correspond à l'id que le client me présente
     $requete= $pdo->prepare('SELECT uniqid, pseudo, id, adresse_ip FROM utilisateur WHERE id=:id');
     $requete->bindValue(':id', $utilisateur->id, PDO::PARAM_INT);
@@ -25,7 +39,10 @@ else if(isset($_COOKIE['souvenir'])){
     if(!$res){ // si ca renvoi false c'est que j'ai un problème avec le cookie id donc dans le doute je detruit les cookies
         setcookie('souvenir', '', time() - 60, '/', 'localhost', false, true);
         setcookie('id', '', time() - 60, '/', 'localhost', false, true);
-        header('Location:https://localhost/Projet_bdd/connexion.php');
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = 'connexion.php';
+        header("Location: http://$host$uri/$extra");
     }
     else{
         $protection1 = 'b6tg3frt54bbd'; // ce que j'ai ajouté devant l'uniqid envoyé dans le cookie souvenir
@@ -50,7 +67,10 @@ else if(isset($_COOKIE['souvenir'])){
             $requete->execute();
             setcookie('souvenir', '', time() - 60, '/', 'localhost', false, true);
             setcookie('id', '', time() - 60, '/', 'localhost', false, true);
-            header('Location:https://localhost/Projet_bdd/connexion.php');
+            $host  = $_SERVER['HTTP_HOST'];
+            $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            $extra = 'connexion.php';
+            header("Location: http://$host$uri/$extra");
             
         }
     }
@@ -58,7 +78,10 @@ else if(isset($_COOKIE['souvenir'])){
 
 }
 else{
-    header('Location:https://localhost/Projet_bdd/connexion.php');
+           $host  = $_SERVER['HTTP_HOST'];
+           $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+           $extra = 'connexion.php';
+           header("Location: http://$host$uri/$extra");
 }
 // le cookie avec l'uniqid en bdd, si c'est ok et que l'utilisateur->ip est la même on refait des variables session.
 // si ni session ni cookie alors go se connecter

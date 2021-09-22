@@ -8,6 +8,25 @@ $vfpass = htmlspecialchars($_POST['pass']);
 $vfpass2 = htmlspecialchars($_POST['pass2']);
 $utilisateur->pass=password_hash($vfpass,PASSWORD_BCRYPT);
 
+// code pour futur application sur heroku et connexion bdd
+
+if (getenv('JAWSDB_URL') !== false){
+    $dbparts = parse_url(getenv('JAWSDB_URL'));
+    
+    $hostname = $dbparts['host'];
+    $username = $dbparts['user'];
+    $password = $dbparts['pass'];
+    $database = ltrim($dbparts['path'],'/');
+    
+    }
+else{
+    $username = 'root';
+    $password = '';
+    $database = 'Projet_Bdd';
+    $hostname = 'localhost';
+    }
+    
+
 // Je veux que mes mot de passe contiennent au moins 8 caractères dont 1 caractère special, 1 majuscule, 1 chiffre
 
 $patt = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/";
@@ -30,7 +49,7 @@ if($vfpass === $vfpass2){ // On vérifie si les mots de passe entrées sont iden
     if(preg_match($pattern, $utilisateur->mail)){
         //si c'est bon On vérifie que le login ou le mail n'existe pas deja dans la bdd
 
-$pdo= New PDO('mysql:dbname=Projet_bdd;host=localhost', 'root', '');
+$pdo= New PDO("mysql:dbname=$database;host=$hostname", $username, $password);
 
 $requête=$pdo->prepare('SELECT * FROM utilisateur WHERE pseudo=:pseudo'); // tentative de recup des infos via le pseudo
 $requête->bindValue(':pseudo',$utilisateur->pseudo);
@@ -57,8 +76,11 @@ if(!$res){
     $requête3->bindValue(':datee', time());
     $requête3->execute();
 // on a entré dans la bdd les valeurs fournies par l'utilisateur
-    echo ' enregistrement réussi';
-    header('Location:https://localhost/Projet_bdd/connexion.php');
+// on redirige vers la page de connexion
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'connexion.php';
+    header("Location: http://$host$uri/$extra");
 }
 else{
     echo 'mail déja existant dans notre base de données';
@@ -66,7 +88,7 @@ else{
 }
 else{
     echo 'pseudo déjà existant dans notre base de donnée';
-    var_dump($res2);
+    
 }
 
 
