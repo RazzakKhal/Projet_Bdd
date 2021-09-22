@@ -16,7 +16,9 @@
       $utilisateur->pseudo = $_SESSION['pseudo'];
       $utilisateur->callpseudo();
       
+      
       ?>
+      <br>
       <a id="deco" href="deconnexion.php"> Deconnexion </a> 
       <script src="index.js"></script>
     </body>

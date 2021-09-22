@@ -14,8 +14,8 @@
        }
       ?>
       <div id="container">
-          <form id="formulaire" method="post" action="verifconnexion.php">
-              <legend id="titre">Informations personnelles</legend><br>
+          <form id="formulaire2" method="post" action="verifconnexion.php">
+              <legend id="titre">Se connecter</legend><br>
 
               <label for="mail"> Identifiant </label>
               <input type="mail" name="mail" id="mail" placeholder="Entre ton mail" required><br><br>

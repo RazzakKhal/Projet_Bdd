@@ -3,7 +3,7 @@
     padding:0px;
 }
 
-/* page de connexion */
+
 body{
 background: linear-gradient(45deg, #FC466B, #3F5EFB);
 height:100vh;
@@ -12,6 +12,8 @@ justify-content:center;
 align-items:center;
 font-family:arial,sans-serif;
 }
+
+/* page de connexion *//* page de connexion *//* page de connexion *//* page de connexion */
 
 #container{
     position:relative;
@@ -25,7 +27,6 @@ form{
     border-radius:20px;
     border-top: 1.5px solid rgba(255,255,255, 0.3);
     border-left: 1.5px solid rgba(255,255,255, 0.3);
-    /* effet sympa à ajouter */
     box-shadow:20px 20px 34px rgba(0,0,0, 0.2);
     text-align:center;
     
@@ -111,4 +112,101 @@ input{
     left:0px;
     height:0.2%;
     width:100%;
+    filter:none;
+}
+
+
+/*page d'inscription*//*page d'inscription*//*page d'inscription*//*page d'inscription*//*page d'inscription*/
+
+
+#container1{
+    position:relative;
+}
+
+
+#formulaire{
+    background-color: rgba(255,255,255, 0.3);
+    padding:30px;
+    height:80vh;
+    width:75vh;
+    border-radius:20px;
+    border-top: 1.5px solid rgba(255,255,255, 0.3);
+    border-left: 1.5px solid rgba(255,255,255, 0.3);
+    box-shadow:20px 20px 34px rgba(0,0,0, 0.2);
+    text-align:center;
+    
+    
+}
+
+#mail1{
+    background:transparent;
+    padding:10px;
+    margin:10px;
+    border:none;
+    border-right:2px solid rgba(255,255,255, 0.3);
+    border-bottom:2px solid rgba(255,255,255, 0.3);
+ 
+}
+
+#pass1{
+    background:transparent;
+    padding:10px;
+    margin:10px;
+    border:none;
+    border-right:2px solid rgba(255,255,255, 0.3);
+    border-bottom:2px solid rgba(255,255,255, 0.3);
+ 
+}
+
+#pseudo1{
+    background:transparent;
+    padding:10px;
+    margin:10px;
+    border:none;
+    border-right:2px solid rgba(255,255,255, 0.3);
+    border-bottom:2px solid rgba(255,255,255, 0.3);
+ 
+}
+
+#pass2{
+    background:transparent;
+    padding:10px;
+    margin:10px;
+    border:none;
+    border-right:2px solid rgba(255,255,255, 0.3);
+    border-bottom:2px solid rgba(255,255,255, 0.3);
+    
+ 
+}
+
+#pseudolabel{
+    color: rgba(255,255,255, 0.7);
+    font-size: 1.1rem;
+}
+
+#maillabel{
+    color: rgba(255,255,255, 0.7);
+    font-size: 1.1rem;
+}
+
+#mdplabel{
+    color: rgba(255,255,255, 0.7);
+    font-size: 1.1rem;
+}
+
+#mdp2label{
+    color: rgba(255,255,255, 0.7);
+    font-size: 1.1rem;
+}
+
+#titre1{
+    padding:5px;
+    color:rgba(255,255,255, 0.7);
+    font-size: 1.5rem;
+    margin-bottom:20px;
+    text-shadow:rgba(255,255,255, 0.3);
+    border:none;
+    border-left:2px solid rgba(255,255,255, 0.3);
+    border-bottom:2px solid rgba(255,255,255, 0.3);
+
 }
