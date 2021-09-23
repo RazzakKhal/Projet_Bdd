@@ -13,7 +13,7 @@ if (getenv('CLEARDB_DATABASE_URL') !== false){
     $hostname = $clearbd_url['host'];
     $username = $clearbd_url['user'];
     $password = $clearbd_url['pass'];
-    $database = ltrim($clearbd_url['path'],1);
+    $database = substr($clearbd_url['path'],1);
     $active_group = 'default';
     $query_builder = TRUE;
 
