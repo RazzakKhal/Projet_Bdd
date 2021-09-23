@@ -77,10 +77,8 @@ if(!$res){
     $requête3->execute();
 // on a entré dans la bdd les valeurs fournies par l'utilisateur
 // on redirige vers la page de connexion
-    $host  = $_SERVER['HTTP_HOST'];
-    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $extra = 'connexion.php';
-    header("Location: http://$host$uri/$extra");
+
+    header('Location: http://projetbdd1.herokuapp.com/connexion.php');
 }
 else{
     echo 'mail déja existant dans notre base de données';

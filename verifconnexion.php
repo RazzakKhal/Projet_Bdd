@@ -69,10 +69,8 @@ if(isset($_POST['souvenir'])){
      setcookie('id', $utilisateur->id, time() + 86400, '/', 'localhost', false, true);
     
 }
-     $host  = $_SERVER['HTTP_HOST'];
-     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-     $extra = 'index.php';
-     header("Location: http://$host$uri/$extra");
+     
+     header('Location: http://projetbdd1.herokuapp.com/index.php');
 
 }
 }

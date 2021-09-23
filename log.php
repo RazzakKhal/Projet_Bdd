@@ -20,7 +20,7 @@ else{
     $hostname = 'localhost';
     }
   //
-    
+
 if(isset($_SESSION['pseudo'])){
 
 }
@@ -39,10 +39,8 @@ else if(isset($_COOKIE['souvenir'])){
     if(!$res){ // si ca renvoi false c'est que j'ai un problème avec le cookie id donc dans le doute je detruit les cookies
         setcookie('souvenir', '', time() - 60, '/', 'localhost', false, true);
         setcookie('id', '', time() - 60, '/', 'localhost', false, true);
-        $host  = $_SERVER['HTTP_HOST'];
-        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-        $extra = 'connexion.php';
-        header("Location: http://$host$uri/$extra");
+        
+        header('Location: http://projetbdd1.herokuapp.com/connexion.php');
     }
     else{
         $protection1 = 'b6tg3frt54bbd'; // ce que j'ai ajouté devant l'uniqid envoyé dans le cookie souvenir
@@ -67,10 +65,7 @@ else if(isset($_COOKIE['souvenir'])){
             $requete->execute();
             setcookie('souvenir', '', time() - 60, '/', 'localhost', false, true);
             setcookie('id', '', time() - 60, '/', 'localhost', false, true);
-            $host  = $_SERVER['HTTP_HOST'];
-            $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            $extra = 'connexion.php';
-            header("Location: http://$host$uri/$extra");
+            header('Location: http://projetbdd1.herokuapp.com/connexion.php');
             
         }
     }
@@ -78,10 +73,7 @@ else if(isset($_COOKIE['souvenir'])){
 
 }
 else{
-           $host  = $_SERVER['HTTP_HOST'];
-           $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-           $extra = 'connexion.php';
-           header("Location: http://$host$uri/$extra");
+    header('Location: http://projetbdd1.herokuapp.com/connexion.php');
 }
 // le cookie avec l'uniqid en bdd, si c'est ok et que l'utilisateur->ip est la même on refait des variables session.
 // si ni session ni cookie alors go se connecter
