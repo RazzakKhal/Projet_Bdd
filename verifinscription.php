@@ -10,13 +10,16 @@ $utilisateur->pass=password_hash($vfpass,PASSWORD_BCRYPT);
 
 // code pour futur application sur heroku et connexion bdd
 
-if (getenv('JAWSDB_URL') !== false){
-    $dbparts = parse_url(getenv('JAWSDB_URL'));
+if (getenv('CLEARDB_DATABASE_URL') !== false){
+    $clearbd_url = parse_url(getenv('CLEARDB_DATABASE_URL'));
     
-    $hostname = $dbparts['host'];
-    $username = $dbparts['user'];
-    $password = $dbparts['pass'];
-    $database = ltrim($dbparts['path'],'/');
+    $hostname = $clearbd_url['host'];
+    $username = $clearbd_url['user'];
+    $password = $clearbd_url['pass'];
+    $database = ltrim($clearbd_url['path'],1);
+    $active_group = 'default';
+    $query_builder = TRUE;
+
     
     }
 else{
@@ -25,7 +28,6 @@ else{
     $database = 'Projet_Bdd';
     $hostname = 'localhost';
     }
-    
 
 // Je veux que mes mot de passe contiennent au moins 8 caractères dont 1 caractère special, 1 majuscule, 1 chiffre
 

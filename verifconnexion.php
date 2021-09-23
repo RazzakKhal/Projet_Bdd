@@ -7,13 +7,16 @@ $utilisateur->mail = htmlspecialchars($_POST['mail']); // ajout evitement faille
 $utilisateur->pass = htmlspecialchars($_POST['pass']);   
 // code pour futur application sur heroku et connexion bdd
 
-if (getenv('JAWSDB_URL') !== false){
-    $dbparts = parse_url(getenv('JAWSDB_URL'));
+if (getenv('CLEARDB_DATABASE_URL') !== false){
+    $clearbd_url = parse_url(getenv('CLEARDB_DATABASE_URL'));
     
-    $hostname = $dbparts['host'];
-    $username = $dbparts['user'];
-    $password = $dbparts['pass'];
-    $database = ltrim($dbparts['path'],'/');
+    $hostname = $clearbd_url['host'];
+    $username = $clearbd_url['user'];
+    $password = $clearbd_url['pass'];
+    $database = ltrim($clearbd_url['path'],1);
+    $active_group = 'default';
+    $query_builder = TRUE;
+
     
     }
 else{
@@ -22,7 +25,6 @@ else{
     $database = 'Projet_Bdd';
     $hostname = 'localhost';
     }
-    
 
 
 
