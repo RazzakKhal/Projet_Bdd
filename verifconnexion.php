@@ -23,7 +23,7 @@ else{
     $username = 'root';
     $password = '';
     $database = 'Projet_Bdd';
-    $hostname = 'localhost';
+    $hostname = $hostname;
     }
 
 
@@ -67,8 +67,8 @@ if(isset($_POST['souvenir'])){
 
 
      // on creer les cookies souvenir et pseudo
-     setcookie('souvenir', 'b6tg3frt54bbd' . $utilisateur->uniqid . 'tp43c', time() + 86400, '/', 'localhost', false, true);
-     setcookie('id', $utilisateur->id, time() + 86400, '/', 'localhost', false, true);
+     setcookie('souvenir', 'b6tg3frt54bbd' . $utilisateur->uniqid . 'tp43c', time() + 86400, '/', $hostname, false, true);
+     setcookie('id', $utilisateur->id, time() + 86400, '/', $hostname, false, true);
     
 }
      
