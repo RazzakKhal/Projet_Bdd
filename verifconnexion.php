@@ -16,6 +16,7 @@ if (getenv('CLEARDB_DATABASE_URL') !== false){
     $database = substr($clearbd_url['path'],1);
     $active_group = 'default';
     $query_builder = TRUE;
+    $domainecookie = 'projetbdd1.herokuapp.com';
 
     
     }
@@ -23,7 +24,8 @@ else{
     $username = 'root';
     $password = '';
     $database = 'Projet_Bdd';
-    $hostname = $hostname;
+    $hostname = 'localhost';
+    $domainecookie = 'localhost';
     }
 
 
@@ -67,8 +69,8 @@ if(isset($_POST['souvenir'])){
 
 
      // on creer les cookies souvenir et pseudo
-     setcookie('souvenir', 'b6tg3frt54bbd' . $utilisateur->uniqid . 'tp43c', time() + 86400, '/', $hostname, false, true);
-     setcookie('id', $utilisateur->id, time() + 86400, '/', $hostname, false, true);
+     setcookie('souvenir', 'b6tg3frt54bbd' . $utilisateur->uniqid . 'tp43c', time() + 86400, '/', $domainecookie, false, true);
+     setcookie('id', $utilisateur->id, time() + 86400, '/', $domainecookie, false, true);
     
 }
      

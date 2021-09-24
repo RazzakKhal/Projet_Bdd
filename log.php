@@ -13,6 +13,7 @@ if (getenv('CLEARDB_DATABASE_URL') !== false){
     $database = substr($clearbd_url['path'],1);
     $active_group = 'default';
     $query_builder = TRUE;
+    $domainecookie = 'projetbdd1.herokuapp.com';
 
     
     }
@@ -20,8 +21,10 @@ else{
     $username = 'root';
     $password = '';
     $database = 'Projet_Bdd';
-    $hostname = $hostname;
+    $hostname = 'localhost';
+    $domainecookie = 'localhost';
     }
+
   //
 
 if(isset($_SESSION['pseudo'])){
@@ -40,8 +43,8 @@ else if(isset($_COOKIE['souvenir'])){
     $res = $requete->fetch(PDO::FETCH_NUM);
     // AJOUTER LA COMPARAISON DE Lutilisateur->ip DANS LE IF DU DESSOUS
     if(!$res){ // si ca renvoi false c'est que j'ai un problème avec le cookie id donc dans le doute je detruit les cookies
-        setcookie('souvenir', '', time() - 60, '/', $hostname, false, true);
-        setcookie('id', '', time() - 60, '/', $hostname, false, true);
+        setcookie('souvenir', '', time() - 60, '/', $domainecookie, false, true);
+        setcookie('id', '', time() - 60, '/', $domainecookie, false, true);
         
         header('Location: http://projetbdd1.herokuapp.com/connexion.php');
     }
@@ -66,8 +69,8 @@ else if(isset($_COOKIE['souvenir'])){
             $requete->bindValue(':id', $utilisateur->id, PDO::PARAM_INT);
             $requete->bindValue(':uniqid', NULL);
             $requete->execute();
-            setcookie('souvenir', '', time() - 60, '/', $hostname, false, true);
-            setcookie('id', '', time() - 60, '/', $hostname, false, true);
+            setcookie('souvenir', '', time() - 60, '/', $domainecookie, false, true);
+            setcookie('id', '', time() - 60, '/', $domainecookie, false, true);
             header('Location: http://projetbdd1.herokuapp.com/connexion.php');
             
         }

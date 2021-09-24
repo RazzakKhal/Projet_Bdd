@@ -19,6 +19,7 @@ if (getenv('CLEARDB_DATABASE_URL') !== false){
     $database = substr($clearbd_url['path'],1);
     $active_group = 'default';
     $query_builder = TRUE;
+    $domainecookie = 'projetbdd1.herokuapp.com';
 
     
     }
@@ -27,7 +28,9 @@ else{
     $password = '';
     $database = 'Projet_Bdd';
     $hostname = 'localhost';
+    $domainecookie = 'localhost';
     }
+
 
 // Je veux que mes mot de passe contiennent au moins 8 caractères dont 1 caractère special, 1 majuscule, 1 chiffre
 
