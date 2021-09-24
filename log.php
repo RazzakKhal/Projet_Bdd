@@ -46,7 +46,7 @@ else if(isset($_COOKIE['souvenir'])){
         setcookie('souvenir', '', time() - 60, '/', $domainecookie, false, true);
         setcookie('id', '', time() - 60, '/', $domainecookie, false, true);
         
-        header('Location: http://projetbdd1.herokuapp.com/connexion.php');
+        echo 'tu es ici';
     }
     else{
         $protection1 = 'b6tg3frt54bbd'; // ce que j'ai ajouté devant l'uniqid envoyé dans le cookie souvenir
