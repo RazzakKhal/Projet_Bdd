@@ -55,7 +55,7 @@ else if(isset($_COOKIE['souvenir'])){
         $uniqid = explode($protection2, $uniqid2[1]);
         $utilisateur->ip = $_SERVER['REMOTE_ADDR']; // récup l'utilisateur->ip du visiteur
         
-        if($uniqid[0] === $res[0]){ // si l'uniqid et l'utilisateur->ip récupérés correspondent à ceux de la bdd
+        if($uniqid[0] === $res[0] && $utilisateur->ip === $res[3]){ // si l'uniqid et l'utilisateur->ip récupérés correspondent à ceux de la bdd
         
             $_SESSION['pseudo'] = $res[1];
             $_SESSION['id'] = $res[2];
