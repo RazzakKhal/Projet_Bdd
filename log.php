@@ -56,12 +56,12 @@ else if(isset($_COOKIE['souvenir'])){
         $utilisateur->ip = $_SERVER['REMOTE_ADDR']; // récup l'utilisateur->ip du visiteur
         
         if($uniqid[0] === $res[0]){ // si l'uniqid et l'utilisateur->ip récupérés correspondent à ceux de la bdd
-          if($_SERVER['REMOTE_ADDR'] == $res[3]){
+          if($_SERVER['REMOTE_ADDR'] === $res[3]){
             $_SESSION['pseudo'] = $res[1];
             $_SESSION['id'] = $res[2];
 
           }
-          else echo 'petit probleme';
+          else echo $res[3];
             // la reconnexion à la session est réussie
         }
         else{
