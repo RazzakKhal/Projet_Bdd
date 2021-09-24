@@ -59,7 +59,9 @@ else if(isset($_COOKIE['souvenir'])){
           if($_SERVER['REMOTE_ADDR'] === $res[3]){
             $_SESSION['pseudo'] = $res[1];
             $_SESSION['id'] = $res[2];
+
           }
+          else echo 'petit probleme';
             // la reconnexion à la session est réussie
         }
         else{
